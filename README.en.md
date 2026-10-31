@@ -214,3 +214,6 @@ Adding a component requires coordinated updates to `types.ts`, defaults in `App.
 | Components are outside the visible area | Pan or zoom out; reset restores the initial viewport rather than fitting all components |
 
 This documentation and its screenshots were prepared from the running repository on **2026-10-27**. Both language versions cover the same operations and limitations. Screenshots preserve the application's actual Chinese and English labels.
+
+
+Preliminary source provenance review: [see the findings and review limitations across all three projects](https://github.com/Lilililiyyy/gear-transmission-skills/blob/docs/unified-readme-2026/docs/source-provenance-review.md).
