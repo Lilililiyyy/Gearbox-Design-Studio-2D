@@ -1,6 +1,8 @@
 # Gearbox Design Studio 2D
 
-**中文说明** · [English documentation](README.en.md)
+**中文** · [English](README.en.md)
+
+[![React](https://img.shields.io/badge/React-19.2-149eca?logo=react&logoColor=white)](https://react.dev/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Vite](https://img.shields.io/badge/Vite-6-646cff?logo=vite&logoColor=white)](https://vite.dev/) ![授权](https://img.shields.io/badge/License-未声明-lightgrey)
 
 在浏览器中拖拽机械零件、调整几何参数，搭建减速箱的二维装配布局。
 
@@ -32,7 +34,7 @@ Gearbox Design Studio 2D 是基于 React、TypeScript 和 SVG 的交互式布局
 ### 安装与启动
 
 ```bash
-git clone https://github.com/Lyy0617/Gearbox-Design-Studio-2D.git
+git clone https://github.com/Lilililiyyy/Gearbox-Design-Studio-2D.git
 cd Gearbox-Design-Studio-2D
 npm install
 npm run dev
