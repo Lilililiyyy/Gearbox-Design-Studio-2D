@@ -1,6 +1,8 @@
 # Gearbox Design Studio 2D
 
-**中文说明** · [English documentation](README.en.md)
+**中文** · [English](README.en.md)
+
+[![React](https://img.shields.io/badge/React-19.2-149eca?logo=react&logoColor=white)](https://react.dev/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Vite](https://img.shields.io/badge/Vite-6-646cff?logo=vite&logoColor=white)](https://vite.dev/) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 在浏览器中拖拽机械零件、调整几何参数，搭建减速箱的二维装配布局。
 
@@ -32,7 +34,7 @@ Gearbox Design Studio 2D 是基于 React、TypeScript 和 SVG 的交互式布局
 ### 安装与启动
 
 ```bash
-git clone https://github.com/Lyy0617/Gearbox-Design-Studio-2D.git
+git clone https://github.com/Lilililiyyy/Gearbox-Design-Studio-2D.git
 cd Gearbox-Design-Studio-2D
 npm install
 npm run dev
@@ -40,12 +42,12 @@ npm run dev
 
 打开终端输出的地址。配置端口为 `3000`，通常是 `http://localhost:3000`；端口被占用时，Vite 会尝试后续端口，以终端输出为准。
 
-当前二维布局功能**不需要 API Key，也不需要后端服务**。`vite.config.ts` 中保留了 Gemini 环境变量映射，但现有组件没有调用 AI 接口。
+当前二维布局功能**不需要 API Key，也不需要后端服务**。
 
 ### 构建与本地预览
 
 ```bash
-npx tsc --noEmit
+npm run typecheck
 npm run build
 npm run preview
 ```
@@ -161,9 +163,11 @@ npm run preview
 - **齿轮几何：**画布使用矩形和标识线，不绘制渐开线齿廓。直齿、斜齿和锥齿的显示直径都使用 `z × m`；没有法向 / 端面模数换算或锥齿轮节锥计算。螺旋角可编辑，但不会改变当前固定斜线的方向或间距。
 - **参数覆盖：**数据类型中的压力角、孔径 / 内径等字段没有完整对应的编辑控件，也未参与当前装配校核。只有锥齿轮提供 `0° / 90° / 180° / 270°` 方向按钮；轴仍沿 X 方向显示。
 - **输入校验：**部分数字输入具有 HTML 最小 / 最大值提示，但没有统一的参数合法性和尺寸相容性校验；请使用合理的正尺寸和整数齿数。挡圈的宽度字段不会改变当前固定的图形宽度。
-- **版本与授权：**侧栏显示 `v2.3`，`package.json` 的包版本为 `0.0.0`。仓库当前没有 LICENSE 文件；公开可访问不等于已经授予开源使用许可。
+- **版本：**侧栏显示 `v2.3`，`package.json` 的包版本为 `0.0.0`。
 
 ## 开发说明
+
+本项目采用 [MIT License](LICENSE)。如需闭源集成，可[联系作者](https://github.com/Lilililiyyy)获取商业授权。
 
 ### 技术栈
 

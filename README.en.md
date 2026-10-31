@@ -1,6 +1,8 @@
 # Gearbox Design Studio 2D
 
-[中文说明](README.md) · **English documentation**
+[简体中文](README.md) · **English**
+
+[![React](https://img.shields.io/badge/React-19.2-149eca?logo=react&logoColor=white)](https://react.dev/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Vite](https://img.shields.io/badge/Vite-6-646cff?logo=vite&logoColor=white)](https://vite.dev/) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Drag mechanical components into a browser workspace, edit their dimensions, and arrange a two-dimensional gearbox layout.
 
@@ -32,7 +34,7 @@ Gearbox Design Studio 2D is an interactive layout tool built with React, TypeScr
 ### Install and run
 
 ```bash
-git clone https://github.com/Lyy0617/Gearbox-Design-Studio-2D.git
+git clone https://github.com/Lilililiyyy/Gearbox-Design-Studio-2D.git
 cd Gearbox-Design-Studio-2D
 npm install
 npm run dev
@@ -40,12 +42,12 @@ npm run dev
 
 Open the URL printed in the terminal. The configured port is `3000`, usually `http://localhost:3000`. If that port is occupied, Vite tries subsequent ports; use the URL it actually prints.
 
-The current 2D layout features **require neither an API key nor a backend service**. `vite.config.ts` retains Gemini environment-variable mappings, but the existing components do not call an AI API.
+The current 2D layout features **require neither an API key nor a backend service**.
 
 ### Build and preview locally
 
 ```bash
-npx tsc --noEmit
+npm run typecheck
 npm run build
 npm run preview
 ```
@@ -161,9 +163,11 @@ The following points describe the current implementation so that a schematic lay
 - **Gear geometry:** the canvas uses rectangles and markings rather than involute tooth profiles. Spur, helical, and bevel gear display diameters all use `z × m`; there is no normal / transverse module conversion or bevel pitch-cone calculation. The helix angle is editable, but the current diagonal markings retain their fixed direction and spacing.
 - **Parameter coverage:** fields such as pressure angle and bore / inside diameter exist in data types without complete editing controls and are not used for assembly verification. Only bevel gears offer `0° / 90° / 180° / 270°` orientation buttons. Shafts remain aligned with X.
 - **Validation:** some numeric inputs have HTML minimum / maximum hints, but there is no unified validation of parameter ranges or dimensional compatibility. Use sensible positive dimensions and integer tooth counts. Editing circlip width does not alter its fixed rendered strip width.
-- **Version and licensing:** the sidebar displays `v2.3`, while the package version is `0.0.0`. The repository currently has no LICENSE file; public access does not itself grant an open-source license.
+- **Version:** the sidebar displays `v2.3`, while the package version is `0.0.0`.
 
 ## Development
+
+This project is released under the [MIT License](LICENSE). For proprietary or closed-source integration, [contact the author](https://github.com/Lilililiyyy) to discuss a commercial license.
 
 ### Stack
 

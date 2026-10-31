@@ -25,10 +25,14 @@ export const DesignCanvas: React.FC<Props> = ({ items, selectedId, onAddItem, on
   // --- Coordinate Conversion ---
   const getSVGPoint = (clientX: number, clientY: number) => {
     if (!svgRef.current) return { x: 0, y: 0 };
-    const pt = svgRef.current.createSVGPoint();
+    const svg = svgRef.current;
+    const pt = svg.createSVGPoint();
     pt.x = clientX;
     pt.y = clientY;
-    return pt.matrixTransform(svgRef.current.getScreenCTM()?.inverse());
+    const matrix = svg.getScreenCTM();
+    if (matrix) return pt.matrixTransform(matrix.inverse());
+    const rect = svg.getBoundingClientRect();
+    return { x: viewport.x + (clientX - rect.left) / viewport.zoom, y: viewport.y + (clientY - rect.top) / viewport.zoom };
   };
 
   // --- Drag & Drop (Add New) ---
@@ -57,9 +61,13 @@ export const DesignCanvas: React.FC<Props> = ({ items, selectedId, onAddItem, on
   const handleWheel = (e: React.WheelEvent) => {
     if (e.ctrlKey || e.metaKey) {
       e.preventDefault();
-      const zoomFactor = -e.deltaY * 0.002;
-      const newZoom = Math.min(Math.max(0.1, viewport.zoom + zoomFactor), 5);
-      setViewport(prev => ({ ...prev, zoom: newZoom }));
+      const rect = e.currentTarget.getBoundingClientRect();
+      const px = e.clientX - rect.left;
+      const py = e.clientY - rect.top;
+      const nextZoom = Math.min(5, Math.max(0.1, viewport.zoom * Math.exp(-e.deltaY * 0.002)));
+      const worldX = viewport.x + px / viewport.zoom;
+      const worldY = viewport.y + py / viewport.zoom;
+      setViewport({ x: worldX - px / nextZoom, y: worldY - py / nextZoom, zoom: nextZoom });
     } else {
       if (!draggingItemId) {
         setViewport(prev => ({
@@ -74,6 +82,7 @@ export const DesignCanvas: React.FC<Props> = ({ items, selectedId, onAddItem, on
   // --- Item Dragging & Logic ---
   const handlePointerDown = (e: React.PointerEvent, itemId?: string) => {
     e.preventDefault();
+    svgRef.current?.setPointerCapture(e.pointerId);
     const pt = getSVGPoint(e.clientX, e.clientY);
     setLastMousePos({ x: e.clientX, y: e.clientY });
 
@@ -501,8 +510,8 @@ export const DesignCanvas: React.FC<Props> = ({ items, selectedId, onAddItem, on
         {/* Toolbar */}
         <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
             <div className="bg-white/90 backdrop-blur border border-slate-200 rounded-lg p-1.5 shadow-xl flex flex-col gap-1">
-                <button onClick={() => setViewport(v => ({...v, zoom: v.zoom * 1.2}))} className="p-2 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="放大"><ZoomIn size={20} /></button>
-                <button onClick={() => setViewport(v => ({...v, zoom: v.zoom / 1.2}))} className="p-2 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="缩小"><ZoomOut size={20} /></button>
+                <button onClick={() => setViewport(v => ({...v, zoom: Math.min(5, v.zoom * 1.2)}))} className="p-2 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="放大"><ZoomIn size={20} /></button>
+                <button onClick={() => setViewport(v => ({...v, zoom: Math.max(0.1, v.zoom / 1.2)}))} className="p-2 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="缩小"><ZoomOut size={20} /></button>
                 <button onClick={() => setViewport({x: -500, y: -400, zoom: 1})} className="p-2 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="重置视图"><RefreshCw size={20} /></button>
                 <div className="h-px bg-slate-200 my-1"></div>
                 <button 
@@ -527,7 +536,7 @@ export const DesignCanvas: React.FC<Props> = ({ items, selectedId, onAddItem, on
             onPointerDown={(e) => handlePointerDown(e)}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
-            onPointerLeave={handlePointerUp}
+            onPointerCancel={handlePointerUp}
             onWheel={handleWheel}
             viewBox={`${viewport.x} ${viewport.y} ${svgRef.current?.clientWidth ? svgRef.current.clientWidth / viewport.zoom : 800} ${svgRef.current?.clientHeight ? svgRef.current.clientHeight / viewport.zoom : 600}`}
         >
@@ -577,7 +586,7 @@ export const DesignCanvas: React.FC<Props> = ({ items, selectedId, onAddItem, on
             {/* Render Components on Top */}
             {[...items]
                 .filter(i => i.type !== ComponentType.SHAFT && i.type !== ComponentType.HOUSING)
-                .sort((a, b) => (a.selected ? 1 : 0) - (b.selected ? 1 : 0)) // Selected on top
+                .sort((a, b) => (a.id === selectedId ? 1 : 0) - (b.id === selectedId ? 1 : 0)) // Selected on top
                 .map(item => (
                     <g
                         key={item.id}
