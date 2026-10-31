@@ -47,7 +47,7 @@ npm run dev
 ### 构建与本地预览
 
 ```bash
-npx tsc --noEmit
+npm run typecheck
 npm run build
 npm run preview
 ```
