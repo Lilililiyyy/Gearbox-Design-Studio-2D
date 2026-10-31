@@ -212,3 +212,6 @@ npm run preview
 | 想精确移动组件 | 在属性面板输入 X、Y；此方式不触发自动吸附或轴上零件联动 |
 | 齿轮接近时吸附到意外位置 | 可能触发了优先级更高的间距吸附；暂时关闭磁铁，再输入坐标 |
 | 组件移动到视野外 | 平移或缩小查找；“重置视图”只恢复初始视口，不自动适配所有组件 |
+
+
+源码来源审查（初步）：[查看三个项目的来源线索与审查边界](https://github.com/Lilililiyyy/gear-transmission-skills/blob/docs/unified-readme-2026/docs/source-provenance-review.md)。
