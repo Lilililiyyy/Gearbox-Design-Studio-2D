@@ -2,7 +2,7 @@ name: Build and typecheck
 
 on:
   push:
-    branches: [main]
+    branches: [main, docs/unified-readme-2026]
   pull_request:
     branches: [main]
 
