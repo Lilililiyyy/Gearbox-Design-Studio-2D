@@ -1,6 +1,8 @@
 # Gearbox Design Studio 2D
 
-[中文说明](README.md) · **English documentation**
+[简体中文](README.md) · **English**
+
+[![React](https://img.shields.io/badge/React-19.2-149eca?logo=react&logoColor=white)](https://react.dev/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Vite](https://img.shields.io/badge/Vite-6-646cff?logo=vite&logoColor=white)](https://vite.dev/) ![License](https://img.shields.io/badge/license-not%20specified-lightgrey)
 
 Drag mechanical components into a browser workspace, edit their dimensions, and arrange a two-dimensional gearbox layout.
 
@@ -32,7 +34,7 @@ Gearbox Design Studio 2D is an interactive layout tool built with React, TypeScr
 ### Install and run
 
 ```bash
-git clone https://github.com/Lyy0617/Gearbox-Design-Studio-2D.git
+git clone https://github.com/Lilililiyyy/Gearbox-Design-Studio-2D.git
 cd Gearbox-Design-Studio-2D
 npm install
 npm run dev
