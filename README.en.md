@@ -47,7 +47,7 @@ The current 2D layout features **require neither an API key nor a backend servic
 ### Build and preview locally
 
 ```bash
-npx tsc --noEmit
+npm run typecheck
 npm run build
 npm run preview
 ```
